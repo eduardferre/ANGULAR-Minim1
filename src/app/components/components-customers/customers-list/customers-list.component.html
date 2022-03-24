@@ -7,7 +7,7 @@
         <a class="list-group-item list-group-item-action bg-light" [routerLink]="['/list-customers']"> Customers </a>
         <a class="list-group-item list-group-item-action bg-light" [routerLink]="['/list-owners']"> Owners </a>
         <a class="list-group-item list-group-item-action bg-light" [routerLink]="['/list-restaurants']"> Restaurants </a>
-        <a class="list-group-item list-group-item-action bg-light"> Link1 </a>
+        <a class="list-group-item list-group-item-action bg-light"> Tastes </a>
         <a class="list-group-item list-group-item-action bg-light"> Link2 </a>
       </div>
     </div>
@@ -50,6 +50,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <span class="title"> LLISTAT DE CUSTOMERS </span>
+                        <button class="btn btn-success float-end" [routerLink]="['/list-customers/add-customer']"> ADD CUSTOMER </button>
                         <table *ngIf="listCustomers.length > 0" class="table table-striped mt-3">
                          <thead>
                            <tr>

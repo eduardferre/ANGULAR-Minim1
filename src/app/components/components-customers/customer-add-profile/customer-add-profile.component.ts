@@ -7,15 +7,15 @@ import { ToastrService } from 'ngx-toastr';
 import { Customer } from 'src/app/models/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 
-
 @Component({
-  selector: 'app-customer-profile',
-  templateUrl: './customer-profile.component.html',
-  styleUrls: ['./customer-profile.component.css']
+  selector: 'app-customer-add-profile',
+  templateUrl: './customer-add-profile.component.html',
+  styleUrls: ['./customer-add-profile.component.css']
 })
-export class CustomerProfileComponent implements OnInit {
+export class CustomerAddProfileComponent implements OnInit {
+  customer: Customer | undefined;
   customerForm: FormGroup;
-  title = "User information";
+  title = "NEW COSTUMER";
   _id: string | null;
 
   constructor(private fb: FormBuilder, 
@@ -24,7 +24,7 @@ export class CustomerProfileComponent implements OnInit {
               private _customerService: CustomerService,
               private aRouter: ActivatedRoute) { 
     this.customerForm = this.fb.group({
-      _id: ['', Validators.required],
+      _id: [],
       customerName: ['', Validators.required],
       fullName: ['', Validators.required],
       email: ['', Validators.required],
@@ -32,7 +32,7 @@ export class CustomerProfileComponent implements OnInit {
       listDiscounts: [],
       listReservations: [],
       password: ['', Validators.required],
-      creationDate: ['', Validators.required],
+      creationDate: [],
     });
 
   this._id = this.aRouter.snapshot.paramMap.get('_id');
@@ -43,7 +43,7 @@ export class CustomerProfileComponent implements OnInit {
     this.getCustomerInfo();
   }
 
-  updateCustomer() {
+  addCustomer() {
     const customer: Customer = {
       _id: this.customerForm.get('_id')?.value,
       customerName: this.customerForm.get('customerName')?.value,
@@ -56,9 +56,18 @@ export class CustomerProfileComponent implements OnInit {
       creationDate: this.customerForm.get('creationDate')?.value,
     }
     
-    if (this._id !== null) {
+    if (this._id !== 'add-customer' && this._id !== null) {
       this._customerService.updateCustomer(this._id, customer).subscribe(data => {
-        this.toastr.info('El user ha estat editat amb exit!', 'Customer Canviat');
+        this.router.navigate(['/list-customers/', customer._id])
+      }, error => {
+        console.log(error);
+        this.customerForm.reset();
+      })
+    }
+
+    else {
+      console.log(customer);
+      this._customerService.addCustomer(customer).subscribe(data => {
         this.router.navigate(['/list-customers']);
       }, error => {
         console.log(error);
@@ -68,8 +77,10 @@ export class CustomerProfileComponent implements OnInit {
   }
 
   getCustomerInfo() {
-    if(this._id !== null) {
+    if(this._id !== 'add-customer' && this._id !== null) {
+      this.title = "EDITABLE INFORMATION"
       this._customerService.getCustomerbyID(this._id).subscribe(data => {
+        this.customer = data;
         this.customerForm.setValue({
           _id: data._id,
           customerName: data.customerName,
@@ -85,3 +96,4 @@ export class CustomerProfileComponent implements OnInit {
     }
   }
 }
+

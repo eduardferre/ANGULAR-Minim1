@@ -28,4 +28,5 @@ export class Customer {
         this.listDiscounts = listDisc;
         this.listReservations = listRes;
     }
+
 }

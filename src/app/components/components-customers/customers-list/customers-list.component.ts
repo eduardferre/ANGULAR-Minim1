@@ -5,11 +5,11 @@ import { CustomerService } from 'src/app/services/customer.service';
 
 
 @Component({
-  selector: 'app-customers',
-  templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css']
+  selector: 'app-customers-list',
+  templateUrl: './customers-list.component.html',
+  styleUrls: ['./customers-list.component.css']
 })
-export class CustomersComponent implements OnInit {
+export class CustomersListComponent implements OnInit {
   listCustomers: Customer[] = [];
 
   constructor(private _customerService: CustomerService,
