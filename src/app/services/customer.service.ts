@@ -32,15 +32,23 @@ export class CustomerService {
     return this.http.put(this.url + '/customers/' + id, customer, {responseType: 'text'});
   }
 
-  addTastes(id: string, customer: Customer): Observable<string> {
-    return this.http.put(this.url + '/customers/tastes/add/' + id, customer, {responseType: 'text'});
-  }
-
   deleteCustomer(id: string): Observable<string> {
     return this.http.delete(this.url + '/customers/' + id, {responseType: 'text'})
   }
 
+  addTastes(id: string, customer: Customer): Observable<string> {
+    return this.http.put(this.url + '/customers/tastes/add/' + id, customer, {responseType: 'text'});
+  }
+
   removeTastes(id: string): Observable<string> {
     return this.http.delete(this.url + '/customers/tastes/remove/' + id, {responseType: 'text'});
+  }
+
+  addDiscounts(id: string, customer: Customer): Observable<string> {
+    return this.http.put(this.url + '/customers/discounts/add/' + id, customer, {responseType: 'text'});
+  }
+
+  removeDiscounts(id: string): Observable<string> {
+    return this.http.delete(this.url + '/customers/discounts/remove/' + id, {responseType: 'text'});
   }
 }

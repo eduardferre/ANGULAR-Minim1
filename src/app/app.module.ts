@@ -17,6 +17,7 @@ import { CustomerAddProfileComponent } from './components/components-customers/c
 import { CustomerAddTastesComponent } from './components/components-customers/customer-add-tastes/customer-add-tastes.component';
 import { CustomerAddReservationsComponent } from './components/components-customers/customer-add-reservations/customer-add-reservations.component';
 import { CustomersListComponent } from './components/components-customers/customers-list/customers-list.component';
+import { CustomerAddDiscountComponent } from './components/components-customers/customer-add-discount/customer-add-discount.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CustomersListComponent } from './components/components-customers/custom
     CustomerAddProfileComponent,
     CustomerAddTastesComponent,
     CustomerAddReservationsComponent,
+    CustomerAddDiscountComponent,
   ],
   imports: [
     BrowserModule,

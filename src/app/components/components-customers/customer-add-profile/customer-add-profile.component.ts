@@ -27,8 +27,11 @@ export class CustomerAddProfileComponent implements OnInit {
       _id: [],
       customerName: ['', Validators.required],
       fullName: ['', Validators.required],
-      email: ['', Validators.required],
-      listTastes: [],
+      email: ['', [Validators.required, Validators.email]],
+      listTastes: [{
+        tagName: [],
+        relevance: [],
+      }],
       listDiscounts: [],
       listReservations: [],
       password: ['', Validators.required],
@@ -93,6 +96,16 @@ export class CustomerAddProfileComponent implements OnInit {
           creationDate: data.creationDate,
         })
       })
+    }
+  }
+
+  deleteCustomer() {
+    if (this._id !== null) {
+      this._customerService.deleteCustomer(this._id).subscribe(data => {
+        console.log("User deleted");
+      }, error => {
+        console.log(error);
+      });
     }
   }
 }

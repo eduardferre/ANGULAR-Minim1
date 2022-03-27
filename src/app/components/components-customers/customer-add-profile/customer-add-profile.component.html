@@ -38,8 +38,9 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <button routerLink=".." class="btn btn-secondary btn-lg float-start"> TORNAR </button>
-                            <button type="submit" [disabled]="customerForm.invalid" class="btn btn-success btn-lg float-end"> ACCEPTAR </button>
+                            <button routerLink=".." class="btn btn-secondary btn-lg float-start"> BACK </button>
+                            <button *ngIf="this._id !== null" (click)="deleteCustomer()" routerLink="/list-customers" class="btn btn-danger btn-lg float-mid"> DELETE </button>
+                            <button type="submit" [disabled]="customerForm.invalid" class="btn btn-success btn-lg float-end"> CONFIRM </button>
                         </div>
                     </form>
                 </div>
