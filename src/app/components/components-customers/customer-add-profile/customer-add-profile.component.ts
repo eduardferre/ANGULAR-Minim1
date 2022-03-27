@@ -100,12 +100,18 @@ export class CustomerAddProfileComponent implements OnInit {
   }
 
   deleteCustomer() {
-    if (this._id !== null) {
-      this._customerService.deleteCustomer(this._id).subscribe(data => {
-        console.log("User deleted");
-      }, error => {
-        console.log(error);
-      });
+    if(confirm("Are you sure to delete the taste?")) {
+      if (this._id !== null) {
+        this._customerService.deleteCustomer(this._id).subscribe(data => {
+          console.log("User deleted");
+          this.router.navigate(['/list-customers']);
+        }, error => {
+          console.log(error);
+        });
+      }
+    }
+    else {
+      this.router.navigate(['/list-customers', this._id]);
     }
   }
 }

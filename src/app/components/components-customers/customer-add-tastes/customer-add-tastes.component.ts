@@ -135,18 +135,20 @@ export class CustomerAddTastesComponent implements OnInit {
   }
 
   deleteTaste() {
-    if (this._idtaste !== null && this.customer !== undefined && this._id !== null) {
-      for (var i = this.customer.listTastes.length - 1; i >= 0; i -= 1) {
-        if (this.customer.listTastes[i]._id == this._idtaste) {
-          this.customer.listTastes.splice(i, 1);
+    if(confirm("Are you sure to delete the taste?")) {
+      if (this._idtaste !== null && this.customer !== undefined && this._id !== null) {
+        for (var i = this.customer.listTastes.length - 1; i >= 0; i -= 1) {
+          if (this.customer.listTastes[i]._id == this._idtaste) {
+            this.customer.listTastes.splice(i, 1);
+          }
         }
+        
+        this._customerService.updateCustomer(this._id, this.customer).subscribe(data => {
+          console.log("Taste deleted");
+        }, error => {
+          console.log(error);
+        });
       }
-
-      this._customerService.updateCustomer(this._id, this.customer).subscribe(data => {
-        console.log("Taste deleted");
-      }, error => {
-        console.log(error);
-      });
     }
   }
 }

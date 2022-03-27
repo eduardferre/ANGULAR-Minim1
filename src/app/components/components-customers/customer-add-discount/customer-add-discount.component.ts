@@ -140,19 +140,20 @@ export class CustomerAddDiscountComponent implements OnInit {
   }
 
   deleteDiscount() {
-    if (this._iddiscount !== null && this.customer !== undefined && this._id !== null) {
-      for (var i = this.customer.listDiscounts.length - 1; i >= 0; i -= 1) {
-        if (this.customer.listDiscounts[i]._id == this._iddiscount) {
-          this.customer.listDiscounts.splice(i, 1);
+    if(confirm("Are you sure to delete the taste?")) {
+      if (this._iddiscount !== null && this.customer !== undefined && this._id !== null) {
+        for (var i = this.customer.listDiscounts.length - 1; i >= 0; i -= 1) {
+          if (this.customer.listDiscounts[i]._id == this._iddiscount) {
+            this.customer.listDiscounts.splice(i, 1);
+          }
         }
-      }
 
-      this._customerService.updateCustomer(this._id, this.customer).subscribe(data => {
-        console.log("Discount deleted");
-      }, error => {
-        console.log(error);
-      });
+        this._customerService.updateCustomer(this._id, this.customer).subscribe(data => {
+          console.log("Discount deleted");
+        }, error => {
+          console.log(error);
+        });
+      }
     }
   }
-
 }
