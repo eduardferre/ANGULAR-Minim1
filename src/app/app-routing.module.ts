@@ -14,6 +14,8 @@ import { CustomerAddReservationsComponent } from './components/components-custom
 import { CustomerAddDiscountsComponent } from './components/components-customers/customer-add-discounts/customer-add-discounts.component';
 import { RestaurantsListComponent } from './components/components-restaurants/restaurants-list/restaurants-list.component';
 import { OwnersListComponent } from './components/components-owners/owners-list/owners-list.component';
+import { OwnersAddProfileComponent } from './components/components-owners/owners-add-profile/owners-add-profile.component';
+import { OwnersAddRestaurantsComponent } from './components/components-owners/owners-add-restaurants/owners-add-restaurants.component';
 
 // Routes
 
@@ -30,9 +32,13 @@ const routes: Routes = [
   { path: 'list-customers/:_id/add-discount', component: CustomerAddDiscountsComponent},
   { path: 'list-customers/:_id/:_iddiscount/edit-discount', component: CustomerAddDiscountsComponent},
 
-
+  { path: 'list-owners/add-owner', component: OwnersAddProfileComponent},
   { path: 'list-owners', component: OwnersListComponent},
   { path: 'list-owners/:_id', component: OwnerProfileComponent},
+  { path: 'list-owners/:_id/edit-owner', component: OwnersAddProfileComponent},
+  { path: 'list-owners/:_id/add-restaurant', component: OwnersAddRestaurantsComponent},
+  { path: 'list-owners/:_id/:_idrest/edit-restaurant', component: OwnersAddRestaurantsComponent},
+
   { path: 'list-restaurants', component: RestaurantsListComponent},
   { path: 'list-restaurants/:_id', component: RestaurantProfileComponent},
   { path: '**', redirectTo: '', pathMatch: 'full'} // In case of a wrong URL, the code redirects to the main path

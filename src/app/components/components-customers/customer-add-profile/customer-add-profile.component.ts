@@ -100,7 +100,7 @@ export class CustomerAddProfileComponent implements OnInit {
   }
 
   deleteCustomer() {
-    if(confirm("Are you sure to delete the taste?")) {
+    if(confirm("Are you sure to delete the customer?")) {
       if (this._id !== null) {
         this._customerService.deleteCustomer(this._id).subscribe(data => {
           console.log("User deleted");

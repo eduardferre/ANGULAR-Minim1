@@ -1,1 +1,51 @@
-<p>owners-add-profile works!</p>
+<div class="container mt-3">
+    <div class="class row">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="title"> {{ title | uppercase }} </span>
+                    <form class="mt-3" [formGroup]="ownerForm" (ngSubmit)="addOwner()">
+                        <div class="mb-3">
+                            <input type="text" formControlName="fullName" 
+                                class="form-control form-control-lg" placeholder="Full Name">
+                            <div class="text-danger"
+                                *ngIf="ownerForm.get('fullName')?.hasError('required') && ownerForm.get('fullName')?.touched">
+                                <span>El nom del owner és obligatori</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="ownerName"
+                                class="form-control form-control-lg" placeholder="owner Name">
+                            <div class="text-danger"
+                                *ngIf="ownerForm.get('ownerName')?.hasError('required') && ownerForm.get('ownerName')?.touched">
+                                <span>El username del owner és obligatori</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" name="email" ngModel email formControlName="email"
+                                class="form-control form-control-lg" placeholder="Email">
+                            <div class="text-danger"
+                                *ngIf="ownerForm.get('email')?.hasError('required') && ownerForm.get('email')?.touched">
+                                <span>L'email del owner és obligatori</span>
+                            </div>
+                        </div>
+                        <div class="mb-3" *ngIf="owner?.fullName == null">
+                            <input type="text" formControlName="password"
+                                class="form-control form-control-lg" placeholder="Password">
+                            <div class="text-danger"
+                                *ngIf="ownerForm.get('password')?.hasError('required') && ownerForm.get('password')?.touched">
+                                <span>El password del owner és obligatori</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button routerLink=".." class="btn btn-secondary btn-lg float-start"> BACK </button>
+                            <button *ngIf="this._id !== null" (click)="deleteOwner()" class="btn btn-danger btn-lg float-mid"> DELETE </button>
+                            <button type="submit" [disabled]="ownerForm.invalid" class="btn btn-success btn-lg float-end"> CONFIRM </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -5,9 +5,12 @@ export class Owner {
     email: string;
     password: string;
     creationDate: Date;
-    listRestaurants: []; //Array containing the IDs of the restaurants.
+    listRestaurants: [{
+        _id: string;
+        restName: string;
+    }]; //Array containing the IDs of the restaurants.
 
-    constructor(_id: string, name: string, fullName: string, email: string, pass: string, cDate: Date, listRest: []) {
+    constructor(_id: string, name: string, fullName: string, email: string, pass: string, cDate: Date, listRest: [{_id: string, restName: string}]) {
         this._id = _id;
         this.ownerName = name;
         this.fullName = fullName;
