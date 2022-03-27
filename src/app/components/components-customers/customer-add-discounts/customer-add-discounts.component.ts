@@ -5,11 +5,11 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from 'src/app/models/customer';
 
 @Component({
-  selector: 'app-customer-add-discount',
-  templateUrl: './customer-add-discount.component.html',
-  styleUrls: ['./customer-add-discount.component.css']
+  selector: 'app-customer-add-discounts',
+  templateUrl: './customer-add-discounts.component.html',
+  styleUrls: ['./customer-add-discounts.component.css']
 })
-export class CustomerAddDiscountComponent implements OnInit {
+export class CustomerAddDiscountsComponent implements OnInit {
   customer: Customer | undefined;
   discountForm: FormGroup;
   title = "ADD DISCOUNT";

@@ -6,14 +6,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomerProfileComponent } from './components/components-customers/customer-profile/customer-profile.component';
 import { CustomersListComponent } from './components/components-customers/customers-list/customers-list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { OwnerProfileComponent } from './components/owner-profile/owner-profile.component';
-import { OwnersComponent } from './components/owners/owners.component';
-import { RestaurantProfileComponent } from './components/restaurant-profile/restaurant-profile.component';
-import { RestaurantsComponent } from './components/restaurants/restaurants.component';
+import { OwnerProfileComponent } from './components/components-owners/owner-profile/owner-profile.component';
+import { RestaurantProfileComponent } from './components/components-restaurants/restaurant-profile/restaurant-profile.component';
 import { CustomerAddProfileComponent } from './components/components-customers/customer-add-profile/customer-add-profile.component';
 import { CustomerAddTastesComponent } from './components/components-customers/customer-add-tastes/customer-add-tastes.component';
 import { CustomerAddReservationsComponent } from './components/components-customers/customer-add-reservations/customer-add-reservations.component';
-import { CustomerAddDiscountComponent } from './components/components-customers/customer-add-discount/customer-add-discount.component';
+import { CustomerAddDiscountsComponent } from './components/components-customers/customer-add-discounts/customer-add-discounts.component';
+import { RestaurantsListComponent } from './components/components-restaurants/restaurants-list/restaurants-list.component';
+import { OwnersListComponent } from './components/components-owners/owners-list/owners-list.component';
 
 // Routes
 
@@ -27,13 +27,13 @@ const routes: Routes = [
   { path: 'list-customers/:_id/:_idtaste/edit-taste', component: CustomerAddTastesComponent},
   { path: 'list-customers/:_id/add-reservation', component: CustomerAddReservationsComponent},
   { path: 'list-customers/:_id/:_idtaste/edit-reservation', component: CustomerAddReservationsComponent},
-  { path: 'list-customers/:_id/add-discount', component: CustomerAddDiscountComponent},
-  { path: 'list-customers/:_id/:_iddiscount/edit-discount', component: CustomerAddDiscountComponent},
+  { path: 'list-customers/:_id/add-discount', component: CustomerAddDiscountsComponent},
+  { path: 'list-customers/:_id/:_iddiscount/edit-discount', component: CustomerAddDiscountsComponent},
 
 
-  { path: 'list-owners', component: OwnersComponent},
+  { path: 'list-owners', component: OwnersListComponent},
   { path: 'list-owners/:_id', component: OwnerProfileComponent},
-  { path: 'list-restaurants', component: RestaurantsComponent},
+  { path: 'list-restaurants', component: RestaurantsListComponent},
   { path: 'list-restaurants/:_id', component: RestaurantProfileComponent},
   { path: '**', redirectTo: '', pathMatch: 'full'} // In case of a wrong URL, the code redirects to the main path
 
