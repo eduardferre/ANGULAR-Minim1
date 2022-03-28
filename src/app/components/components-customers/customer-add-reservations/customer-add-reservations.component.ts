@@ -19,8 +19,7 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
 })
 export class CustomerAddReservationsComponent implements OnInit {
   customer: Customer | undefined;
-  reservation: Reservation | undefined;
-  restaurant: Restaurant | undefined;
+  restaurants: string | undefined;
   reservationForm: FormGroup;
   title = "NEW COSTUMER";
   _id: string | null;
@@ -34,14 +33,12 @@ export class CustomerAddReservationsComponent implements OnInit {
               private aRouter: ActivatedRoute) { 
     this.reservationForm = this.fb.group({
       _id: [''],
-      customerName: ['', Validators.required],
+      customerName: [''],
       fullName: [''],
       email: [''],
       listTastes: [],
       listDiscounts: [],
-      listReservations: [{
-        _id: [''],
-      }],
+      listReservations: [],
       password: [''],
       creationDate: [],
 
@@ -65,7 +62,7 @@ export class CustomerAddReservationsComponent implements OnInit {
     this.getCustomerInfo();
   }
 
-  addReservation() {
+  async addReservation() {
     const customer: Customer = {
       _id: this.reservationForm.get('_id')?.value,
       customerName: this.reservationForm.get('customerName')?.value,
@@ -73,14 +70,12 @@ export class CustomerAddReservationsComponent implements OnInit {
       email: this.reservationForm.get('email')?.value,
       listDiscounts: this.reservationForm.get('listDiscounts')?.value,
       listTastes: this.reservationForm.get('listTastes')?.value,
-      listReservations: [{
-        _id: this.reservationForm.value.listReservations._id,
-      }],
+      listReservations: this.reservationForm.get('listReservations')?.value,
       password: this.reservationForm.get('password')?.value,
       creationDate: this.reservationForm.get('creationDate')?.value,
     }
 
-    const reservation: Reservation = {
+    let reservation: Reservation = {
       _id: this.reservationForm.get('_idreserv')?.value,
       _idCustomer: this.reservationForm.get('_idCustomer')?.value,
       _idRestaurant: this.reservationForm.get('_idRestaurant')?.value,
@@ -104,11 +99,13 @@ export class CustomerAddReservationsComponent implements OnInit {
       }],
       listMenus: this.reservationForm.get('listMenus')?.value,
     }
+
+    let _idrestaurant;
     
     if (this._id !== null) {
       if (this._idreserv !== null) {
-        this.addReservsToCustomer(customer);
-        this._customerService.addReservation(reservation).subscribe(data => {
+        console.log(reservation);
+        this._customerService.updateReservation(reservation._id, reservation).subscribe(data => {
           this.router.navigate(['/list-customers/', this._id])
         }, error => {
           console.log(error);
@@ -117,11 +114,17 @@ export class CustomerAddReservationsComponent implements OnInit {
       }
 
       else {
-        this._customerService.addReservation(reservation).subscribe(data => {
-          this.router.navigate(['/list-customers/', this._id]);
-        }, error => {
-          console.log(error);
-          this.reservationForm.reset();
+        await this._restaurantService.getRestaurantbyName(restaurant.restaurantName).subscribe(data => {
+          reservation._idRestaurant = data._id;
+          if (this._id != null) {
+            reservation._idCustomer = this._id;
+            this._customerService.addReservation(reservation).subscribe(data => {
+              this.router.navigate(['/list-customers/', this._id]);
+            }, error => {
+              console.log(error);
+              this.reservationForm.reset();
+            })
+          }
         })
       }
     }
@@ -129,43 +132,39 @@ export class CustomerAddReservationsComponent implements OnInit {
 
   getCustomerInfo() {
     if(this._idreserv !== null && this._id !== null) {
+      let restaurant: string;
       this.title = "Edit Reservation"
+
       this._customerService.getCustomerbyID(this._id).subscribe(data => {
         this.delReservsFromCustomer(data);
+        this.restaurants = '';
+
+        this._restaurantService.getRestaurantbyID(data.listReservations[0]._idRestaurant).subscribe(data1 => {
+          restaurant = data1.restaurantName;
+          this.restaurants = restaurant;
+
         this.reservationForm.setValue({
           _id: data._id,
           customerName: data.customerName,
           fullName: data.fullName,
           email: data.email,
+          listTastes: data.listTastes,
           listDiscounts: data.listDiscounts,
-          listReservations: {
-            _id: data.listReservations[0]._id,
-          },
+          listReservations: data.listReservations,
           password: data.password,
           creationDate: data.creationDate,
-        })
-      })
-      
-      this._customerService.getReservationbyID(this._id).subscribe(data => {
-        this.reservation = data;
-        this.reservationForm.setValue({
-          _idreserv: data._id,
-          _idCustomer: data._idCustomer,
-          _idRestaurant: data._idRestaurant,
-          dateReservation: data.dateReservation,
-          timeReservation: data.timeReservation,
-          creationDateReservation: data.creationDate,
-        })
-      })
+          
+          _idreserv: data.listReservations[0]._id,
+          _idCustomer: data.listReservations[0]._idCustomer,
+          _idRestaurant: data.listReservations[0]._idRestaurant,
+          dateReservation: data.listReservations[0].dateReservation,
+          timeReservation: data.listReservations[0].timeReservation,
+          creationDateReservation: data.listReservations[0].creationDate,
 
-      if (this.reservation?._idRestaurant !== undefined) {
-        this._restaurantService.getRestaurantbyID(this.reservation?._idRestaurant).subscribe(data => {
-          this.restaurant = data;
-          this.reservationForm.setValue({
-            restaurantName: data.restaurantName,
-          })
+          restaurantName: data1.restaurantName
         })
-      }
+        })
+      })
     }
   }
 
@@ -190,6 +189,19 @@ export class CustomerAddReservationsComponent implements OnInit {
       this._customerService.getCustomerbyID(this._id).subscribe(data => {
         this.customer = data;
       })
+    }
+  }
+
+  deleteReservation() {
+    if(confirm("Are you sure to delete the reservation?")) {
+      if (this._idreserv !== null) {
+        this._customerService.deleteReservation(this._idreserv).subscribe(data => {
+          console.log("Reservation deleted");
+          this.router.navigate(['/list-customers', this._id]);
+        }, error => {
+          console.log(error);
+        });
+      }
     }
   }
 

@@ -54,7 +54,11 @@ export class CustomerService {
   }
 
   addReservation(reservation: Reservation): Observable<string> {
-    return this.http.put(this.url + '/reservations', reservation, {responseType: 'text'});
+    return this.http.post(this.url + '/reservations', reservation, {responseType: 'text'});
+  }
+
+  updateReservation(id: string, reservation: Reservation): Observable<string> {
+    return this.http.put(this.url + '/reservations/' + id, reservation, {responseType: 'text'});
   }
 
   getReservationbyID(id: string): Observable<Reservation> {
@@ -68,5 +72,4 @@ export class CustomerService {
   deleteReservation(id: string): Observable<string> {
     return this.http.delete(this.url + '/reservations/' + id, {responseType: 'text'});
   }
-
 }

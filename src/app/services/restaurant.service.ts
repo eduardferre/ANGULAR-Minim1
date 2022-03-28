@@ -23,8 +23,8 @@ export class RestaurantService {
     return this.http.get<Restaurant>(this.url + '/restaurants/' + id);
   }
 
-  getRestaurantbyName() {
-
+  getRestaurantbyName(name: string): Observable<Restaurant> {
+    return this.http.get<Restaurant>(this.url + '/restaurants/name/' + name);
   }
 
   updateRestaurant() {

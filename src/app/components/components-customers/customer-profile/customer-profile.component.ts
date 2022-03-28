@@ -20,8 +20,7 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
 })
 export class CustomerProfileComponent implements OnInit {
   customer: Customer | undefined;
-  reservations: [Reservation] | undefined;
-  restaurants: [Restaurant] | undefined;
+  restaurants: [string] | undefined;
   title = "Customer Information";
   _id: string | null;
 
@@ -42,23 +41,20 @@ export class CustomerProfileComponent implements OnInit {
 
   async getCustomerInfo() {
     if(this._id !== null) {
-      
+      let restaurant: string;
+
       this._customerService.getCustomerbyID(this._id).subscribe(data => {
         this.customer = data;
+        this.restaurants = [''];
+        
+        data.listReservations.forEach(rest => {
+          this._restaurantService.getRestaurantbyID(rest._idRestaurant).subscribe(data => {
+            restaurant = data.restaurantName;
+            this.restaurants?.pop();
+            this.restaurants?.push(restaurant);
+          })
+        });
       })
-
-      this.customer?.listReservations.forEach(reserv => {
-        this._customerService.getReservationbyID(reserv._id).subscribe(data => {
-          this.reservations?.push(data);
-          console.log(this.reservations);
-        })
-      });
-
-      this.reservations?.forEach(rest => {
-        this._restaurantService.getRestaurantbyID(rest._idRestaurant).subscribe(data => {
-          this.restaurants?.push(data);
-        })
-      });
     }
   }
 }

@@ -135,10 +135,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let rest of restaurants">
-                                <td> {{ rest.restaurantName }} </td>
-                              </tr>
-                              <tr *ngFor="let reserv of reservations">
+                              <!-- <tr *ngFor="let rest of restaurants">
+                                <td> {{ rest }} </td>
+                              </tr> -->
+                              <tr *ngFor="let reserv of customer?.listReservations">
+                                <td *ngFor="let rest of restaurants"> {{ rest }} </td>
                                 <td> {{ reserv.dateReservation }} </td>
                                 <td> {{ reserv.timeReservation }} </td>
                                 <td>

@@ -1,3 +1,5 @@
+import { Reservation } from "./reservations";
+
 export class Customer {
     _id: string;
     customerName: string;
@@ -16,12 +18,10 @@ export class Customer {
         amount: number;
         expirationDate: string;
     }];
-    listReservations: [{
-        _id: string;
-    }]; //Array containing the IDs of the reservations of the customer.
+    listReservations: [Reservation]; //Array containing the IDs of the reservations of the customer.
 
     constructor(_id: string, name: string, fullName: string, email: string, pass: string, cDate: Date, listTas: [{_id: string, tagName: string, relevance: number}], 
-                listDisc: [{_id: string, nameRestaurant: string, amount: number, expirationDate: string}], listRes: [{_id: string}]) {
+                listDisc: [{_id: string, nameRestaurant: string, amount: number, expirationDate: string}], listRes: [res: Reservation]) {
         this._id = _id;
         this.customerName = name;
         this.fullName = fullName;
