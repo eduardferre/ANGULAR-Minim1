@@ -70,6 +70,7 @@ export class CustomerAddDiscountsComponent implements OnInit {
     if (this._id !== null) {
       if (this._iddiscount !== null) {
         this.addDiscountsToCustomer(customer);
+        console.log(customer.listDiscounts);
         this._customerService.updateCustomer(this._id, customer).subscribe(data => {
           this.router.navigate(['/list-customers/', this._id])
         }, error => {
@@ -79,7 +80,6 @@ export class CustomerAddDiscountsComponent implements OnInit {
       }
 
       else {
-        console.log(customer.listTastes);
         this._customerService.addDiscounts(this._id, customer).subscribe(data => {
           this.router.navigate(['/list-customers/', this._id]);
         }, error => {
@@ -91,7 +91,7 @@ export class CustomerAddDiscountsComponent implements OnInit {
   }
 
   getCustomerInfo() {
-    if(this.customer == undefined && this._iddiscount !== null && this._id !== null) {
+    if(this._iddiscount !== null && this._id !== null) {
       this.title = "EDIT DISCOUNT"
       this._customerService.getCustomerbyID(this._id).subscribe(data => {
         this.delDiscountsFromCustomer(data);

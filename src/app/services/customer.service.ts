@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Customer } from '../models/customer';
 import { ParsedHostBindings } from '@angular/compiler';
+import { Reservation } from '../models/reservations';
 
 @Injectable({
   providedIn: 'root'
@@ -51,4 +52,21 @@ export class CustomerService {
   removeDiscounts(id: string): Observable<string> {
     return this.http.delete(this.url + '/customers/discounts/remove/' + id, {responseType: 'text'});
   }
+
+  addReservation(reservation: Reservation): Observable<string> {
+    return this.http.put(this.url + '/reservations', reservation, {responseType: 'text'});
+  }
+
+  getReservationbyID(id: string): Observable<Reservation> {
+    return this.http.get<Reservation>(this.url + '/reservations/' + id);
+  }
+
+  getReservationbyName(name: string): Observable<Reservation> {
+    return this.http.get<Reservation>(this.url + '/reservations/' + name);
+  }
+
+  deleteReservation(id: string): Observable<string> {
+    return this.http.delete(this.url + '/reservations/' + id, {responseType: 'text'});
+  }
+
 }

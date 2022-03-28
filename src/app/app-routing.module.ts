@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'list-customers/:_id/add-taste', component: CustomerAddTastesComponent},
   { path: 'list-customers/:_id/:_idtaste/edit-taste', component: CustomerAddTastesComponent},
   { path: 'list-customers/:_id/add-reservation', component: CustomerAddReservationsComponent},
-  { path: 'list-customers/:_id/:_idtaste/edit-reservation', component: CustomerAddReservationsComponent},
+  { path: 'list-customers/:_id/:_idreserv/edit-reservation', component: CustomerAddReservationsComponent},
   { path: 'list-customers/:_id/add-discount', component: CustomerAddDiscountsComponent},
   { path: 'list-customers/:_id/:_iddiscount/edit-discount', component: CustomerAddDiscountsComponent},
 

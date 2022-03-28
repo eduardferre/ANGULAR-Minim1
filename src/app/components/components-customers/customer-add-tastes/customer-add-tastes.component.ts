@@ -33,7 +33,7 @@ export class CustomerAddTastesComponent implements OnInit {
       listDiscounts: [],
       listReservations: [],
       password: [''],
-      creationDate: []
+      creationDate: ['']
     });
 
 

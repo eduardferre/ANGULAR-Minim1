@@ -5,7 +5,12 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Customer } from 'src/app/models/customer';
+import { Owner } from 'src/app/models/owners';
+import { Reservation } from 'src/app/models/reservations';
+import { Restaurant } from 'src/app/models/restaurants';
 import { CustomerService } from 'src/app/services/customer.service';
+import { OwnerService } from 'src/app/services/owner.service';
+import { RestaurantService } from 'src/app/services/restaurant.service';
 
 
 @Component({
@@ -15,7 +20,8 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class CustomerProfileComponent implements OnInit {
   customer: Customer | undefined;
-  customerForm: FormGroup;
+  reservations: [Reservation] | undefined;
+  restaurants: [Restaurant] | undefined;
   title = "Customer Information";
   _id: string | null;
 
@@ -23,21 +29,8 @@ export class CustomerProfileComponent implements OnInit {
               private router: Router, 
               private toastr: ToastrService,
               private _customerService: CustomerService,
+              private _restaurantService: RestaurantService,
               private aRouter: ActivatedRoute) { 
-    this.customerForm = this.fb.group({
-      _id: ['', Validators.required],
-      customerName: ['', Validators.required],
-      fullName: ['', Validators.required],
-      email: ['', Validators.required],
-      listTastes: [{
-        tagName: [],
-        relevance: [],
-      }],
-      listDiscounts: [],
-      listReservations: [],
-      password: ['', Validators.required],
-      creationDate: ['', Validators.required],
-    });
 
   this._id = this.aRouter.snapshot.paramMap.get('_id');
   console.log(this._id);
@@ -47,22 +40,25 @@ export class CustomerProfileComponent implements OnInit {
     this.getCustomerInfo();
   }
 
-  getCustomerInfo() {
+  async getCustomerInfo() {
     if(this._id !== null) {
+      
       this._customerService.getCustomerbyID(this._id).subscribe(data => {
         this.customer = data;
-        this.customerForm.setValue({
-          _id: data._id,
-          customerName: data.customerName,
-          fullName: data.fullName,
-          email: data.email,
-          listTastes: data.listTastes,
-          listDiscounts: data.listDiscounts,
-          listReservations: data.listReservations,
-          password: data.password,
-          creationDate: data.creationDate,
-        })
       })
+
+      this.customer?.listReservations.forEach(reserv => {
+        this._customerService.getReservationbyID(reserv._id).subscribe(data => {
+          this.reservations?.push(data);
+          console.log(this.reservations);
+        })
+      });
+
+      this.reservations?.forEach(rest => {
+        this._restaurantService.getRestaurantbyID(rest._idRestaurant).subscribe(data => {
+          this.restaurants?.push(data);
+        })
+      });
     }
   }
 }

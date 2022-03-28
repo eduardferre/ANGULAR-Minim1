@@ -135,15 +135,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let reserv of customer?.listReservations">
-                                    <!-- <td> {{ reserv.nameRestaurant }} </td>
-                                    <td> {{ reserv.dateReservation }} </td>
-                                    <td> {{ reserv.timeReservation }} </td>
-                                    <td>
-                                      <i [routerLink]="['/list-customers', customer?._id, reserv._id, 'edit-reservation']" class="fa-solid fa-pen-to-square text-primary"> Edit </i>
-                                    </td> -->
-                                </tr>
-                                </tbody>
+                              <tr *ngFor="let rest of restaurants">
+                                <td> {{ rest.restaurantName }} </td>
+                              </tr>
+                              <tr *ngFor="let reserv of reservations">
+                                <td> {{ reserv.dateReservation }} </td>
+                                <td> {{ reserv.timeReservation }} </td>
+                                <td>
+                                  <i [routerLink]="['/list-customers', customer?._id, reserv._id, 'edit-reservation']" class="fa-solid fa-pen-to-square text-primary"> Edit </i>
+                                </td>
+                              </tr>
+                            </tbody>
                         </table>
                         <button class="btn btn-success float-end" [routerLink]="['/list-customers', customer?._id, 'add-reservation']"> ADD RESERVATION </button>
                     </div>

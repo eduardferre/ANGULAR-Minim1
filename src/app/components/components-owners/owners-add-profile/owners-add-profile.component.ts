@@ -73,6 +73,7 @@ export class OwnersAddProfileComponent implements OnInit {
 
   getOwnerInfo() {
     if(this._id !== null) {
+      this.title = "Editable Information";
       this._ownerService.getOwnerbyID(this._id).subscribe(data => {
         this.owner = data;
         this.ownerForm.setValue({
