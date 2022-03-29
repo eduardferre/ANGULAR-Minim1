@@ -194,7 +194,13 @@ export class CustomerAddReservationsComponent implements OnInit {
 
   deleteReservation() {
     if(confirm("Are you sure to delete the reservation?")) {
-      if (this._idreserv !== null) {
+      if (this._idreserv !== null && this.customer !== undefined && this._id !== null) {
+        for (var i = this.customer.listReservations.length - 1; i >= 0; i -= 1) {
+          if (this.customer.listReservations[i]._id == this._idreserv) {
+            this.customer.listReservations.splice(i, 1);
+          }
+        }
+      
         this._customerService.deleteReservation(this._idreserv).subscribe(data => {
           console.log("Reservation deleted");
           this.router.navigate(['/list-customers', this._id]);
@@ -204,5 +210,4 @@ export class CustomerAddReservationsComponent implements OnInit {
       }
     }
   }
-
 }

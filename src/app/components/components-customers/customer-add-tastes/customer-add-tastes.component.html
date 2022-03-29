@@ -7,6 +7,12 @@
                     <form class="mt-3" [formGroup]="tasteForm" (ngSubmit)="addTaste()">
                         <div formGroupName="listTastes">
                             <div class="mb-3">
+                                <!-- AIXÒ PER A PODER FER UNA SELECCIÓ MÚLTIPLE QUAN ES TINGUIN TOTS ELS TASTES -->
+                                <!-- <select multiple formControlName="cityName">
+                                    <option value="">Choose your city</option>
+                                    <option *ngFor="let city of City" [ngValue]="city" (change)="changeCity($event)">city
+                                    </option>
+                                 </select> -->
                                 <input type="text" formControlName="tagName" 
                                     class="form-control form-control-lg" placeholder="Taste Name">
                                 <!-- AIXÒ NO EM FUNCIONA????? -->

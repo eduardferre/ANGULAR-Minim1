@@ -80,6 +80,7 @@ export class CustomerAddDiscountsComponent implements OnInit {
       }
 
       else {
+        console.log(customer);
         this._customerService.addDiscounts(this._id, customer).subscribe(data => {
           this.router.navigate(['/list-customers/', this._id]);
         }, error => {
@@ -140,7 +141,7 @@ export class CustomerAddDiscountsComponent implements OnInit {
   }
 
   deleteDiscount() {
-    if(confirm("Are you sure to delete the taste?")) {
+    if(confirm("Are you sure to delete the discount?")) {
       if (this._iddiscount !== null && this.customer !== undefined && this._id !== null) {
         for (var i = this.customer.listDiscounts.length - 1; i >= 0; i -= 1) {
           if (this.customer.listDiscounts[i]._id == this._iddiscount) {

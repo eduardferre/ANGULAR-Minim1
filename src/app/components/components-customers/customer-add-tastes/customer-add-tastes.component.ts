@@ -76,6 +76,7 @@ export class CustomerAddTastesComponent implements OnInit {
       }
 
       else {
+        console.log(customer);
         this._customerService.addTastes(this._id, customer).subscribe(data => {
           this.router.navigate(['/list-customers/', this._id]);
         }, error => {

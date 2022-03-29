@@ -45,6 +45,7 @@ export class CustomerProfileComponent implements OnInit {
 
       this._customerService.getCustomerbyID(this._id).subscribe(data => {
         this.customer = data;
+        console.log(data);
         this.restaurants = [''];
         
         data.listReservations.forEach(rest => {
