@@ -1,1 +1,134 @@
-<p>restaurant-profile works!</p>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading"> Appétit </div>
+      <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action bg-light" [routerLink]="['']"> Dashboard </a>
+        <a class="list-group-item list-group-item-action bg-light" [routerLink]="['/list-customers']"> Customers </a>
+        <a class="list-group-item list-group-item-action bg-light" [routerLink]="['/list-owners']"> Owners </a>
+        <a class="list-group-item list-group-item-action bg-light" [routerLink]="['/list-restaurants']"> Restaurants </a>
+        <a class="list-group-item list-group-item-action bg-light"> Tastes </a>
+        <a class="list-group-item list-group-item-action bg-light"> Link2 </a>
+      </div>
+    </div>
+
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="back" routerLink=".."> Back </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#"> Link1 </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> Link2 </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#"> Action </a>
+                <a class="dropdown-item" href="#"> Another action </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"> Something else here </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+      <div class="mt-3"></div>
+      <h1 class="title1 text-center"> {{ rest?.restaurantName }} </h1>
+      
+
+    <!-- OWNERS -->
+
+      <div class="container mt-3">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <span class="title"> {{ title | uppercase }} </span>
+                        <table class="table table-sm mt-3">
+                            <tbody>
+                                <col width="1500">
+                                <tr>
+                                  <th scope="row"> Restaurant ID: </th>
+                                  <td> {{ rest?._id }} </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"> Restaurant Name: </th>
+                                    <td> {{ rest?.restaurantName }} </td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row"> Owner Name: </th>
+                                    <td> {{ rest?.owner?.fullName }} </td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row"> Restaurant Email: </th>
+                                    <td> {{ rest?.email }} </td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row"> Address Date: </th>
+                                    <td> {{ rest?.address }} </td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row"> Restaurant Rating: </th>
+                                    <td> {{ rest?.rating }} </td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row"> Restaurant Date: </th>
+                                    <td> {{ rest?.creationDate | date }} </td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row"> Restaurant Description: </th>
+                                    <td> {{ rest?.description }} </td>
+                                  </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-success float-end" [routerLink]="['/list-restaurants', rest?._id, 'edit-restaurant']"> EDIT RESTAURANT </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TASTES -->
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <span class="title"> LIST OF TASTES </span>
+                        <table class="table table-sm mt-3">
+                            <thead>
+                                <tr>
+                                  <th scope="col"> Taste Name </th>
+                                  <th scope="col"> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let taste of rest?.listTags">
+                                  <td> {{ taste.tagName }} </td>
+                                  <td>
+                                    <i [routerLink]="['/list-restaurants', rest?._id, taste.tagName, 'edit-taste']" class="fa-solid fa-pen-to-square text-primary"> Edit </i>
+                                  </td>
+                                </tr>
+                              </tbody>
+                        </table>
+                        <button class="btn btn-success float-end" [routerLink]="['/list-restaurants', rest?._id, 'add-taste']"> ADD TASTE </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+    <!-- /#page-content-wrapper -->
+</div>
+  <!-- /#wrapper -->

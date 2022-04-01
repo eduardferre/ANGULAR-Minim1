@@ -33,7 +33,7 @@
                         </div>
                         <div class="mb-3">
                             <button [routerLink]='["/list-customers", this._id]' class="btn btn-secondary btn-lg float-start"> BACK </button>
-                            <button *ngIf="this._iddiscount !== null" (click)="deleteDiscount()" [routerLink]='["/list-customers", this._id]' class="btn btn-danger btn-lg float-mid"> DELETE </button>
+                            <button *ngIf="this.nameDisc !== null && this.amountDisc !== null" (click)="deleteDiscount()" [routerLink]='["/list-customers", this._id]' class="btn btn-danger btn-lg float-mid"> DELETE </button>
                             <button type="submit" [disabled]="discountForm.invalid" class="btn btn-success btn-lg float-end"> CONFIRM </button>
                         </div>
                     </form>

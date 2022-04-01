@@ -13,8 +13,10 @@ export class CustomerAddDiscountsComponent implements OnInit {
   customer: Customer | undefined;
   discountForm: FormGroup;
   title = "ADD DISCOUNT";
-  _iddiscount: string | null;
+  nameDisc: string | null;
+  amountDisc: string | null;
   _id: string | null;
+  _idDisc: string | null;
 
   constructor(private fb: FormBuilder, 
               private router: Router,
@@ -27,7 +29,6 @@ export class CustomerAddDiscountsComponent implements OnInit {
       email: [''],
       listTastes: [''],
       listDiscounts: this.fb.group({
-        _id: [''],
         nameRestaurant: ['', Validators.required],
         amount: ['', Validators.required],
         expirationDate: ['', Validators.required]
@@ -37,11 +38,17 @@ export class CustomerAddDiscountsComponent implements OnInit {
       creationDate: []
     });
 
+    this.nameDisc = '';
+    this.amountDisc = '';
 
     this._id = this.aRouter.snapshot.paramMap.get('_id');
     console.log(this._id);
-    this._iddiscount = this.aRouter.snapshot.paramMap.get('_iddiscount');
-    console.log(this._iddiscount);
+    this.nameDisc = this.aRouter.snapshot.paramMap.get('nameDisc');
+    console.log(this.nameDisc);
+    this.amountDisc = this.aRouter.snapshot.paramMap.get('amountDisc');
+    console.log(this.amountDisc);
+    this._idDisc = "";
+
   }
 
   ngOnInit(): void {
@@ -56,7 +63,6 @@ export class CustomerAddDiscountsComponent implements OnInit {
       fullName: this.discountForm.get('fullName')?.value,
       email: this.discountForm.get('email')?.value,
       listDiscounts: [{
-        _id: this.discountForm.value.listDiscounts._id,
         nameRestaurant: this.discountForm.value.listDiscounts.nameRestaurant,
         amount: this.discountForm.value.listDiscounts.amount,
         expirationDate: this.discountForm.value.listDiscounts.expirationDate,
@@ -68,58 +74,68 @@ export class CustomerAddDiscountsComponent implements OnInit {
     }
     
     if (this._id !== null) {
-      if (this._iddiscount !== null) {
-        this.addDiscountsToCustomer(customer);
-        console.log(customer.listDiscounts);
-        this._customerService.updateCustomer(this._id, customer).subscribe(data => {
-          this.router.navigate(['/list-customers/', this._id])
-        }, error => {
-          console.log(error);
-          this.discountForm.reset();
-        })
-      }
-
-      else {
-        console.log(customer);
-        this._customerService.addDiscounts(this._id, customer).subscribe(data => {
-          this.router.navigate(['/list-customers/', this._id]);
-        }, error => {
-          console.log(error);
-          this.discountForm.reset();
-        })
-      }
+      this.addDiscountsToCustomer(customer);
+      console.log(customer.listDiscounts);
+      this._customerService.updateCustomer(this._id, customer).subscribe(data => {
+        this.router.navigate(['/list-customers/', this._id])
+      }, error => {
+        console.log(error);
+        this.discountForm.reset();
+      })
     }
   }
 
   getCustomerInfo() {
-    if(this._iddiscount !== null && this._id !== null) {
-      this.title = "EDIT DISCOUNT"
-      this._customerService.getCustomerbyID(this._id).subscribe(data => {
-        this.delDiscountsFromCustomer(data);
-        this.discountForm.setValue({
-          _id: data._id,
-          customerName: data.customerName,
-          fullName: data.fullName,
-          email: data.email,
-          listTastes: data.listTastes,
-          listDiscounts: {
-            _id: data.listDiscounts[0]._id,
-            nameRestaurant: data.listDiscounts[0].nameRestaurant,
-            amount: data.listDiscounts[0].amount,
-            expirationDate: data.listDiscounts[0].expirationDate
-          },
-          listReservations: data.listReservations,
-          password: data.password,
-          creationDate: data.creationDate,
+    if(this._id !== null) {
+      if(this.nameDisc !== null && this.amountDisc !== null) {
+        this.title = "EDIT DISCOUNT"
+        this._customerService.getCustomerbyID(this._id).subscribe(data => {
+          this.delDiscountsFromCustomer(data);
+          this.discountForm.setValue({
+            _id: data._id,
+            customerName: data.customerName,
+            fullName: data.fullName,
+            email: data.email,
+            listTastes: data.listTastes,
+            listDiscounts: {
+              nameRestaurant: data.listDiscounts[0].nameRestaurant,
+              amount: data.listDiscounts[0].amount,
+              expirationDate: data.listDiscounts[0].expirationDate
+            },
+            listReservations: data.listReservations,
+            password: data.password,
+            creationDate: data.creationDate,
+          })
         })
-      })
+      }
+      else {
+        this.title = "add DISCOUNT"
+        this._customerService.getCustomerbyID(this._id).subscribe(data => {
+          this.delDiscountsFromCustomer(data);
+          this.discountForm.setValue({
+            _id: data._id,
+            customerName: data.customerName,
+            fullName: data.fullName,
+            email: data.email,
+            listTastes: data.listTastes,
+            listDiscounts: {
+              nameRestaurant: '',
+              amount: '',
+              expirationDate: '',
+            },
+            listReservations: data.listReservations,
+            password: data.password,
+            creationDate: data.creationDate,
+          })
+        })
+      }
     }
   }
   
   addDiscountsToCustomer(cust: Customer) {
     if (this.customer !== undefined) {
       for (var i = this.customer?.listDiscounts.length - 1; i >= 0; i -= 1) {
-        if (this.customer?.listDiscounts[i]._id !== this._iddiscount) {
+        if (this.customer?.listDiscounts[i].nameRestaurant !== this.nameDisc && this.customer.listDiscounts[i].amount.toString() !== this.amountDisc) {
           cust.listDiscounts.push(this.customer.listDiscounts[i]);
         }
       }
@@ -129,7 +145,7 @@ export class CustomerAddDiscountsComponent implements OnInit {
   delDiscountsFromCustomer(cust: Customer) {
     if (this._id !== null) {
       for (var i = cust.listDiscounts.length - 1; i >= 0; i -= 1) {
-        if (cust.listDiscounts[i]._id !== this._iddiscount) {
+        if (cust.listDiscounts[i].nameRestaurant !== this.nameDisc && cust.listDiscounts[i].amount.toString() !== this.amountDisc) {
           cust.listDiscounts.splice(i, 1);
         }
       }
@@ -142,10 +158,11 @@ export class CustomerAddDiscountsComponent implements OnInit {
 
   deleteDiscount() {
     if(confirm("Are you sure to delete the discount?")) {
-      if (this._iddiscount !== null && this.customer !== undefined && this._id !== null) {
+      if (this.nameDisc !== null && this.amountDisc !== null && this.customer !== undefined && this._id !== null) {
         for (var i = this.customer.listDiscounts.length - 1; i >= 0; i -= 1) {
-          if (this.customer.listDiscounts[i]._id == this._iddiscount) {
+          if (this.customer.listDiscounts[i].nameRestaurant == this.nameDisc && this.customer.listDiscounts[i].amount.toString() == this.amountDisc) {
             this.customer.listDiscounts.splice(i, 1);
+            console.log(this.customer.listDiscounts);
           }
         }
 

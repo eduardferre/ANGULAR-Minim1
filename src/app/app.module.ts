@@ -20,6 +20,8 @@ import { OwnersAddProfileComponent } from './components/components-owners/owners
 import { OwnersAddRestaurantsComponent } from './components/components-owners/owners-add-restaurants/owners-add-restaurants.component';
 import { CustomerAddDiscountsComponent } from './components/components-customers/customer-add-discounts/customer-add-discounts.component';
 import { OwnersListComponent } from './components/components-owners/owners-list/owners-list.component';
+import { RestaurantAddProfileComponent } from './components/components-restaurants/restaurant-add-profile/restaurant-add-profile.component';
+import { RestaurantAddTastesComponent } from './components/components-restaurants/restaurant-add-tastes/restaurant-add-tastes.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { OwnersListComponent } from './components/components-owners/owners-list/
     RestaurantsListComponent,
     OwnersAddProfileComponent,
     OwnersAddRestaurantsComponent,
-    
+    RestaurantAddProfileComponent,
+    RestaurantAddTastesComponent,
   ],
   imports: [
     BrowserModule,

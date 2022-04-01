@@ -5,6 +5,7 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Owner } from 'src/app/models/owners';
 import { OwnerService } from 'src/app/services/owner.service';
+
 @Component({
   selector: 'app-owners-add-profile',
   templateUrl: './owners-add-profile.component.html',

@@ -5,6 +5,7 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Owner } from 'src/app/models/owners';
 import { OwnerService } from 'src/app/services/owner.service';
+import { RestaurantService } from 'src/app/services/restaurant.service';
 
 @Component({
   selector: 'app-owner-profile',
@@ -13,25 +14,15 @@ import { OwnerService } from 'src/app/services/owner.service';
 })
 export class OwnerProfileComponent implements OnInit {
   owner: Owner | undefined;
-  ownerForm: FormGroup;
+  restaurants: [string] | undefined;
   title = "Owner Information";
   _id: string | null;
 
   constructor(private fb: FormBuilder, 
               private router: Router,
               private _ownerService: OwnerService,
-              private aRouter: ActivatedRoute) { 
-    this.ownerForm = this.fb.group({
-      _id: ['', Validators.required],
-      ownerName: ['', Validators.required],
-      fullName: ['', Validators.required],
-      email: ['', Validators.required],
-      listRestaurants: [{
-        _id: [],
-      }],
-      password: ['', Validators.required],
-      creationDate: ['', Validators.required],
-    });
+              private _restaurantService: RestaurantService,
+              private aRouter: ActivatedRoute) {
 
   this._id = this.aRouter.snapshot.paramMap.get('_id');
   console.log(this._id);
@@ -43,17 +34,20 @@ export class OwnerProfileComponent implements OnInit {
 
   getOwnerInfo() {
     if(this._id !== null) {
+      let namerest: string;
+
       this._ownerService.getOwnerbyID(this._id).subscribe(data => {
         this.owner = data;
-        this.ownerForm.setValue({
-          _id: data._id,
-          ownerName: data.ownerName,
-          fullName: data.fullName,
-          email: data.email,
-          listRestaurants: data.listRestaurants,
-          password: data.password,
-          creationDate: data.creationDate,
+        this.restaurants = [''];
+        this.restaurants.pop();
+       
+        data.listRestaurants.forEach(rest => {
+          this._restaurantService.getRestaurantbyID(rest._id).subscribe(data => {
+            namerest = data.restaurantName;
+            this.restaurants?.push(namerest);
+          })
         })
+        console.log(this.restaurants);
       })
     }
   }

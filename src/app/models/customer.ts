@@ -8,12 +8,10 @@ export class Customer {
     password: string;
     creationDate: Date;
     listTastes:[{
-        _id: string;
         tagName: string;
         relevance: number;  //This value will be dynamically updated with the user activity.
     }]; 
     listDiscounts:[{
-        _id: string;
         nameRestaurant: string;
         amount: number;
         expirationDate: string;

@@ -47,11 +47,11 @@ export class CustomerProfileComponent implements OnInit {
         this.customer = data;
         console.log(data);
         this.restaurants = [''];
+        this.restaurants?.pop();
         
         data.listReservations.forEach(rest => {
           this._restaurantService.getRestaurantbyID(rest._idRestaurant).subscribe(data => {
             restaurant = data.restaurantName;
-            this.restaurants?.pop();
             this.restaurants?.push(restaurant);
           })
         });

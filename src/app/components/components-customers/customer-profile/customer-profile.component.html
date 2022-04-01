@@ -105,7 +105,7 @@
                                   <td> {{ taste.tagName }} </td>
                                   <td> {{ taste.relevance }} </td>
                                   <td>
-                                    <i [routerLink]="['/list-customers', customer?._id, taste._id, 'edit-taste']" class="fa-solid fa-pen-to-square text-primary"> Edit </i>
+                                    <i [routerLink]="['/list-customers', customer?._id, taste.tagName, 'edit-taste']" class="fa-solid fa-pen-to-square text-primary"> Edit </i>
                                   </td>
                                 </tr>
                               </tbody>
@@ -135,11 +135,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              <!-- <tr *ngFor="let rest of restaurants">
-                                <td> {{ rest }} </td>
-                              </tr> -->
-                              <tr *ngFor="let reserv of customer?.listReservations">
-                                <td *ngFor="let rest of restaurants"> {{ rest }} </td>
+                              <tr *ngFor="let reserv of customer?.listReservations; let i = index" [attr.data-index]="i">
+                                <td> {{ restaurants?.[i] }} </td>
                                 <td> {{ reserv.dateReservation }} </td>
                                 <td> {{ reserv.timeReservation }} </td>
                                 <td>
@@ -178,7 +175,7 @@
                                     <td> {{ disc.amount }} </td>
                                     <td> {{ disc.expirationDate }} </td>
                                     <td>
-                                      <i [routerLink]="['/list-customers', customer?._id, disc._id, 'edit-discount']" class="fa-solid fa-pen-to-square text-primary"> Edit </i>
+                                      <i [routerLink]="['/list-customers', customer?._id, disc.nameRestaurant, disc.amount, 'edit-discount']" class="fa-solid fa-pen-to-square text-primary"> Edit </i>
                                     </td>
                                 </tr>
                                 </tbody>

@@ -1,8 +1,6 @@
-import { Owner } from "./owners";
-
-export class Restaurant {
+export class RestaurantADD {
     _id: string;
-    owner: Owner; //The _id of the owner.
+    owner: string; //The _id of the owner.
     restaurantName: string;
     email: string;
     address: string;
@@ -15,7 +13,7 @@ export class Restaurant {
     }]
     listMenus: []; //Array containing the IDs of the menus.
 
-    constructor(_id: string, owner: Owner, restName: string, email: string, add: string, desc: string, photos: [], rating: number, cDate: Date, listTags: [{_id: string, tagName: string}], listMenus: []) {
+    constructor(_id: string, owner: string, restName: string, email: string, add: string, desc: string, photos: [], rating: number, cDate: Date, listTags: [{_id: string, tagName: string}], listMenus: []) {
         this._id = _id;
         this.owner = owner;
         this.restaurantName = restName;

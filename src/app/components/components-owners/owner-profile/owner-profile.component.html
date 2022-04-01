@@ -84,7 +84,7 @@
         </div>
     </div>
 
-    <!-- TASTES -->
+    <!-- RESTAURANTS -->
 
     <div class="container mt-3">
         <div class="row">
@@ -101,11 +101,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let rest of owner?.listRestaurants">
+                                <tr *ngFor="let rest of owner?.listRestaurants; let i = index" [attr.data-index]="i">
                                   <td> {{ rest._id }} </td>
-                                  <td> {{ rest.restName }} </td>
+                                  <td> {{ restaurants?.[i] }} </td>
                                   <td>
-                                    <i [routerLink]="['/list-restaurants', owner?._id, rest._id]" class="fa-solid fa-pen-to-square text-primary"> Edit </i>
+                                    <i [routerLink]="['/list-owners', owner?._id, rest._id, 'edit-restaurant']" class="fa-solid fa-pen-to-square text-primary"> Edit </i>
                                   </td>
                                 </tr>
                               </tbody>

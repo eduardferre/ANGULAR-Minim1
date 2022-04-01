@@ -4,8 +4,8 @@
             <div class="card">
                 <div class="card-body text-center">
                     <span class="title"> {{ title | uppercase }} </span>
-                    <form class="mt-3" [formGroup]="tasteForm" (ngSubmit)="addTaste()">
-                        <div formGroupName="listTastes">
+                    <form class="mt-3" [formGroup]="restForm" (ngSubmit)="addTaste()">
+                        <div formGroupName="listTags">
                             <div class="mb-3">
                                 <!-- AIXÒ PER A PODER FER UNA SELECCIÓ MÚLTIPLE QUAN ES TINGUIN TOTS ELS TASTES -->
                                 <!-- <select multiple formControlName="cityName">
@@ -17,23 +17,15 @@
                                     class="form-control form-control-lg" placeholder="Taste Name">
                                 <!-- AIXÒ NO EM FUNCIONA????? -->
                                 <div class="text-danger"
-                                    *ngIf="!tasteForm.controls['tagName']?.hasError('required') && tasteForm.get('tagName')?.touched">
+                                    *ngIf="!restForm.controls['tagName']?.hasError('required') && restForm.get('tagName')?.touched">
                                     <span>El nom del taste és obligatori</span>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" formControlName="relevance"
-                                    class="form-control form-control-lg" placeholder="Taste Relevance">
-                                <div class="text-danger"
-                                    *ngIf="tasteForm.get('relevance')?.hasError('required') && tasteForm.get('relevance')?.touched">
-                                    <span>La relevance és obligatoria</span>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <button [routerLink]='["/list-customers", this._id]' class="btn btn-secondary btn-lg float-start"> BACK </button>
-                            <button *ngIf="this.nameTaste !== null" (click)="deleteTaste()" [routerLink]='["/list-customers", this._id]' class="btn btn-danger btn-lg float-mid"> DELETE </button>
-                            <button type="submit" [disabled]="tasteForm.invalid" class="btn btn-success btn-lg float-end"> CONFIRM </button>
+                            <button [routerLink]='["/list-restaurants", this._id]' class="btn btn-secondary btn-lg float-start"> BACK </button>
+                            <button *ngIf="this.nameTaste !== null" (click)="deleteTaste()" [routerLink]='["/list-restaurants", this._id]' class="btn btn-danger btn-lg float-mid"> DELETE </button>
+                            <button type="submit" [disabled]="restForm.invalid" class="btn btn-success btn-lg float-end"> CONFIRM </button>
                         </div>
                     </form>
                 </div>

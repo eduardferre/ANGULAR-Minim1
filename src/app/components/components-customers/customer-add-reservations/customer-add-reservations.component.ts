@@ -21,7 +21,7 @@ export class CustomerAddReservationsComponent implements OnInit {
   customer: Customer | undefined;
   restaurants: string | undefined;
   reservationForm: FormGroup;
-  title = "NEW COSTUMER";
+  title = "Add reservation";
   _id: string | null;
   _idreserv: string | null;
 
@@ -86,7 +86,7 @@ export class CustomerAddReservationsComponent implements OnInit {
 
     const restaurant: Restaurant = {
       _id: this.reservationForm.get('_idRestaurant')?.value,
-      _idOwner: this.reservationForm.get('_idOwner')?.value,
+      owner: this.reservationForm.get('owner')?.value,
       restaurantName: this.reservationForm.get('restaurantName')?.value,
       email: this.reservationForm.get('restemail')?.value,
       address: this.reservationForm.get('address')?.value,
@@ -94,13 +94,11 @@ export class CustomerAddReservationsComponent implements OnInit {
       photos: this.reservationForm.get('photos')?.value,
       rating: this.reservationForm.get('rating')?.value,
       creationDate: this.reservationForm.get('creationDateRest')?.value,
-      listTags: [{
-          tagName: this.reservationForm.get('tagNameRest')?.value,
+      listTags: [{ 
+        tagName: this.reservationForm.get('tagNameRest')?.value,
       }],
       listMenus: this.reservationForm.get('listMenus')?.value,
     }
-
-    let _idrestaurant;
     
     if (this._id !== null) {
       if (this._idreserv !== null) {
@@ -203,7 +201,6 @@ export class CustomerAddReservationsComponent implements OnInit {
       
         this._customerService.deleteReservation(this._idreserv).subscribe(data => {
           console.log("Reservation deleted");
-          this.router.navigate(['/list-customers', this._id]);
         }, error => {
           console.log(error);
         });
