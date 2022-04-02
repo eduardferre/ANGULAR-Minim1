@@ -11,9 +11,9 @@ export class RestaurantADD {
     listTags: [{
         tagName: string;
     }]
-    listMenus: []; //Array containing the IDs of the menus.
+    listDishes: []; //Array containing the IDs of the menus.
 
-    constructor(_id: string, owner: string, restName: string, email: string, add: string, desc: string, photos: [], rating: number, cDate: Date, listTags: [{_id: string, tagName: string}], listMenus: []) {
+    constructor(_id: string, owner: string, restName: string, email: string, add: string, desc: string, photos: [], rating: number, cDate: Date, listTags: [{ _id: string, tagName: string }], listDishes: []) {
         this._id = _id;
         this.owner = owner;
         this.restaurantName = restName;
@@ -24,6 +24,6 @@ export class RestaurantADD {
         this.rating = rating;
         this.creationDate = cDate;
         this.listTags = listTags;
-        this.listMenus = listMenus;
+        this.listDishes = listDishes;
     }
 }

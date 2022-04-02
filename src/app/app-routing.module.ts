@@ -18,6 +18,7 @@ import { OwnersAddProfileComponent } from './components/components-owners/owners
 import { OwnersAddRestaurantsComponent } from './components/components-owners/owners-add-restaurants/owners-add-restaurants.component';
 import { RestaurantAddTastesComponent } from './components/components-restaurants/restaurant-add-tastes/restaurant-add-tastes.component';
 import { RestaurantAddProfileComponent } from './components/components-restaurants/restaurant-add-profile/restaurant-add-profile.component';
+import { RestaurantAddDishesComponent } from './components/components-restaurants/restaurant-add-dishes/restaurant-add-dishes.component';
 
 // Routes
 
@@ -47,6 +48,8 @@ const routes: Routes = [
   { path: 'list-restaurants/:_id/edit-restaurant', component: RestaurantAddProfileComponent},
   { path: 'list-restaurants/:_id/add-taste', component: RestaurantAddTastesComponent},
   { path: 'list-restaurants/:_id/:nameTaste/edit-taste', component: RestaurantAddTastesComponent},
+  { path: 'list-restaurants/:_id/add-dish', component: RestaurantAddDishesComponent},
+  { path: 'list-restaurants/:_id/:nameDish/edit-dish', component: RestaurantAddDishesComponent},
   
   { path: '**', redirectTo: '', pathMatch: 'full'} // In case of a wrong URL, the code redirects to the main path
 

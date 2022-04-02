@@ -31,7 +31,7 @@ export class RestaurantProfileComponent implements OnInit {
       listTags: [{
         tagName: [''],
       }],
-      listMenus: [{ }],
+      listDishes: [{ }],
       creationDate: ['', Validators.required],
     });
 
@@ -47,6 +47,7 @@ export class RestaurantProfileComponent implements OnInit {
     if(this._id !== null) {
       this._restaurantService.getRestaurantbyID(this._id).subscribe(data => {
         this.rest = data;
+        console.log(data);
         this.restaurantForm.setValue({
           _id: data._id,
           restaurantName: data.restaurantName,
@@ -58,7 +59,7 @@ export class RestaurantProfileComponent implements OnInit {
           rating: data.rating,
           creationDate: data.creationDate,
           listTags: data.listTags,
-          listMenus: data.listMenus,
+          listDishes: data.listDishes,
         })
       })
     }

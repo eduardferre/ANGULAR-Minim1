@@ -48,7 +48,7 @@ export class OwnersAddRestaurantsComponent implements OnInit {
       listTags: [{
         tagNameRest: [''],
       }],
-      listMenus: [{}],
+      listDishes: [{}],
       creationDateRest: [''],
 
     });
@@ -87,7 +87,7 @@ export class OwnersAddRestaurantsComponent implements OnInit {
       listTags: [{ 
         tagName: this.restaurantForm.get('tagNameRest')?.value,
       }],
-      listMenus: this.restaurantForm.get('listMenus')?.value,
+      listDishes: this.restaurantForm.get('listDishes')?.value,
     }
 
     
@@ -153,7 +153,7 @@ export class OwnersAddRestaurantsComponent implements OnInit {
             photos: data1.photos,
             rating: data1.rating,
             listTags: data1.listTags,
-            listMenus: data1.listMenus,
+            listDishes: data1.listDishes,
             creationDateRest: data1.creationDate,
           })
         })

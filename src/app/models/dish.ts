@@ -1,6 +1,6 @@
 import { Restaurant } from "./restaurants";
 
-export class Menu {
+export class Dish {
     _id: string;
     restaurant: Restaurant;
     title: string;

@@ -31,7 +31,7 @@ export class RestaurantAddProfileComponent implements OnInit {
       listTags: [{
         tagName: [''],
       }],
-      listMenus: [{ }],
+      listDishes: [{ }],
       creationDate: ['', Validators.required],
     });
 
@@ -54,7 +54,7 @@ export class RestaurantAddProfileComponent implements OnInit {
       photos: this.restForm.get('photos')?.value,
       rating: this.restForm.get('rating')?.value,
       listTags: this.restForm.get('listTags')?.value,
-      listMenus: this.restForm.get('listMenus')?.value,
+      listDishes: this.restForm.get('listDishes')?.value,
       creationDate: this.restForm.get('creationDate')?.value,
     }
     
@@ -84,7 +84,7 @@ export class RestaurantAddProfileComponent implements OnInit {
           rating: data.rating,
           creationDate: data.creationDate,
           listTags: data.listTags,
-          listMenus: data.listMenus,
+          listDishes: data.listDishes,
         })
       })
     }

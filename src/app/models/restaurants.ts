@@ -1,3 +1,4 @@
+import { Dish } from "./dish";
 import { Owner } from "./owners";
 
 export class Restaurant {
@@ -13,9 +14,9 @@ export class Restaurant {
     listTags: [{
         tagName: string;
     }]
-    listMenus: []; //Array containing the IDs of the menus.
+    listDishes: [Dish]; //Array containing the IDs of the dishes.
 
-    constructor(_id: string, owner: Owner, restName: string, email: string, add: string, desc: string, photos: [], rating: number, cDate: Date, listTags: [{_id: string, tagName: string}], listMenus: []) {
+    constructor(_id: string, owner: Owner, restName: string, email: string, add: string, desc: string, photos: [], rating: number, cDate: Date, listTags: [{_id: string, tagName: string}], listDishes: [Dish]) {
         this._id = _id;
         this.owner = owner;
         this.restaurantName = restName;
@@ -26,6 +27,6 @@ export class Restaurant {
         this.rating = rating;
         this.creationDate = cDate;
         this.listTags = listTags;
-        this.listMenus = listMenus;
+        this.listDishes = listDishes;
     }
 }

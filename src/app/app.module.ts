@@ -22,6 +22,7 @@ import { CustomerAddDiscountsComponent } from './components/components-customers
 import { OwnersListComponent } from './components/components-owners/owners-list/owners-list.component';
 import { RestaurantAddProfileComponent } from './components/components-restaurants/restaurant-add-profile/restaurant-add-profile.component';
 import { RestaurantAddTastesComponent } from './components/components-restaurants/restaurant-add-tastes/restaurant-add-tastes.component';
+import { RestaurantAddDishesComponent } from './components/components-restaurants/restaurant-add-dishes/restaurant-add-dishes.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { RestaurantAddTastesComponent } from './components/components-restaurant
     OwnersAddRestaurantsComponent,
     RestaurantAddProfileComponent,
     RestaurantAddTastesComponent,
+    RestaurantAddDishesComponent,
   ],
   imports: [
     BrowserModule,

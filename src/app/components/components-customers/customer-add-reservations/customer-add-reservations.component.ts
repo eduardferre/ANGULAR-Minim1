@@ -97,7 +97,7 @@ export class CustomerAddReservationsComponent implements OnInit {
       listTags: [{ 
         tagName: this.reservationForm.get('tagNameRest')?.value,
       }],
-      listMenus: this.reservationForm.get('listMenus')?.value,
+      listDishes: this.reservationForm.get('listDishes')?.value,
     }
     
     if (this._id !== null) {

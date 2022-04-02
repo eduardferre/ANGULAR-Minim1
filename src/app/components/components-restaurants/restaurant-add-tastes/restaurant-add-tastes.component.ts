@@ -32,7 +32,7 @@ export class RestaurantAddTastesComponent implements OnInit {
       listTags: this.fb.group({
         tagName: ['', Validators.required]
       }),
-      listMenus: [{ }],
+      listDishes: [{ }],
       creationDate: [''],
     });
 
@@ -59,7 +59,7 @@ export class RestaurantAddTastesComponent implements OnInit {
       listTags: [{
         tagName: this.restForm.value.listTags.tagName,
       }],
-      listMenus: this.restForm.get('listMenus')?.value,
+      listDishes: this.restForm.get('listDishes')?.value,
       creationDate: this.restForm.get('creationDate')?.value,
     }
     
@@ -93,7 +93,7 @@ export class RestaurantAddTastesComponent implements OnInit {
             listTags: {
               tagName: data.listTags[0].tagName,
             },
-            listMenus: data.listMenus,
+            listDishes: data.listDishes,
           })
         })
       }
@@ -114,7 +114,7 @@ export class RestaurantAddTastesComponent implements OnInit {
               tagName: '',
             },
             creationDate: data.creationDate,
-            listMenus: data.listMenus,
+            listDishes: data.listDishes,
           })
         })
       }
