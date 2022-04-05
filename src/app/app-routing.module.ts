@@ -19,13 +19,21 @@ import { OwnersAddRestaurantsComponent } from './components/components-owners/ow
 import { RestaurantAddTastesComponent } from './components/components-restaurants/restaurant-add-tastes/restaurant-add-tastes.component';
 import { RestaurantAddProfileComponent } from './components/components-restaurants/restaurant-add-profile/restaurant-add-profile.component';
 import { RestaurantAddDishesComponent } from './components/components-restaurants/restaurant-add-dishes/restaurant-add-dishes.component';
+import { LoginComponent } from './components/login/login.component';
+
+import { AuthGuard } from './auth.guard';
 
 // Routes
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent},
+  
+  
+  { path: '', component: LoginComponent},
+
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+
   { path: 'list-customers/add-customer', component: CustomerAddProfileComponent},
-  { path: 'list-customers', component: CustomersListComponent},
+  { path: 'list-customers', component: CustomersListComponent, canActivate: [AuthGuard]},
   { path: 'list-customers/:_id', component: CustomerProfileComponent},
   { path: 'list-customers/:_id/edit-customer', component: CustomerAddProfileComponent},
   { path: 'list-customers/:_id/add-taste', component: CustomerAddTastesComponent},

@@ -4,7 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { FormsModule } from '@angular/forms';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 import { AppComponent } from './app.component';
 import { CustomerProfileComponent } from './components/components-customers/customer-profile/customer-profile.component';
@@ -23,6 +26,7 @@ import { OwnersListComponent } from './components/components-owners/owners-list/
 import { RestaurantAddProfileComponent } from './components/components-restaurants/restaurant-add-profile/restaurant-add-profile.component';
 import { RestaurantAddTastesComponent } from './components/components-restaurants/restaurant-add-tastes/restaurant-add-tastes.component';
 import { RestaurantAddDishesComponent } from './components/components-restaurants/restaurant-add-dishes/restaurant-add-dishes.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,7 @@ import { RestaurantAddDishesComponent } from './components/components-restaurant
     RestaurantAddProfileComponent,
     RestaurantAddTastesComponent,
     RestaurantAddDishesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -51,8 +56,16 @@ import { RestaurantAddDishesComponent } from './components/components-restaurant
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     HttpClientModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
