@@ -94,8 +94,7 @@ export class RestaurantAddProfileComponent implements OnInit {
     if(confirm("Are you sure to delete the restaurant?")) {
       if (this._id !== null) {
         this._restaurantService.deleteRestaurant(this._id).subscribe(data => {
-          console.log("User deleted");
-          this.router.navigate(['/list-restaurants']);
+          console.log("Restaurant deleted");
         }, error => {
           console.log(error);
         });

@@ -104,7 +104,6 @@ export class CustomerAddProfileComponent implements OnInit {
       if (this._id !== null) {
         this._customerService.deleteCustomer(this._id).subscribe(data => {
           console.log("User deleted");
-          this.router.navigate(['/list-customers']);
         }, error => {
           console.log(error);
         });

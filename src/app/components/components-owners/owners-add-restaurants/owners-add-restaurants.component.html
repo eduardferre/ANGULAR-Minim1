@@ -41,7 +41,7 @@
                         </div>
                         <div class="mb-3">
                             <button [routerLink]='["/list-owners", this._id]' class="btn btn-secondary btn-lg float-start"> BACK </button>
-                            <button *ngIf="this._idrest !== null" (click)="deleteRestaurant()" [routerLink]='["/list-owners", this._id]' class="btn btn-danger btn-lg float-mid"> DELETE </button>
+                            <button [routerLink]='["/list-owners", this._id]' *ngIf="this._idrest !== null" (click)="deleteRestaurant()" [routerLink]='["/list-owners", this._id]' class="btn btn-danger btn-lg float-mid"> DELETE </button>
                             <button type="submit" [disabled]="restaurantForm.invalid" class="btn btn-success btn-lg float-end"> CONFIRM </button>
                         </div>
                     </form>

@@ -190,7 +190,6 @@ export class OwnersAddRestaurantsComponent implements OnInit {
       if (this._idrest !== null) {
         this._restaurantService.deleteRestaurant(this._idrest).subscribe(data => {
           console.log("Restaurant deleted");
-          this.router.navigate(['/list-owners', this._id]);
         }, error => {
           console.log(error);
         });
