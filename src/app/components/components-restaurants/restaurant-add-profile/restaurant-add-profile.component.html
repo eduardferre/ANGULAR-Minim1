@@ -1,0 +1,60 @@
+<div class="container mt-3">
+    <div class="class row">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="title"> {{ title | uppercase }} </span>
+                    <form class="mt-3" [formGroup]="restForm" (ngSubmit)="addRestaurant()">
+                        <div class="mb-3">
+                            <input type="text" formControlName="restaurantName" 
+                                class="form-control form-control-lg" placeholder="Restaurant Name">
+                            <div class="text-danger"
+                                *ngIf="restForm.get('restaurantName')?.hasError('required') && restForm.get('restaurantName')?.touched">
+                                <span>El nom del restaurant és obligatori</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" name="email" ngModel email formControlName="email"
+                                class="form-control form-control-lg" placeholder="Email">
+                            <div class="text-danger"
+                                *ngIf="restForm.get('email')?.hasError('required') && restForm.get('email')?.touched">
+                                <span>L'email del restaurant és obligatori</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="address"
+                                class="form-control form-control-lg" placeholder="Address">
+                            <div class="text-danger"
+                                *ngIf="restForm.get('address')?.hasError('required') && restForm.get('address')?.touched">
+                                <span>L'adreça del restaurant és obligatoria</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="rating"
+                                class="form-control form-control-lg" placeholder="Rating">
+                            <div class="text-danger"
+                                *ngIf="restForm.get('rating')?.hasError('required') && restForm.get('rating')?.touched">
+                                <span>El rating del restaurant és obligatori</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <textarea type="text" formControlName="description"
+                                class="form-control form-control-lg" placeholder="Description" rows = "5" cols = "50">
+                            </textarea>
+                            <div class="text-danger"
+                                *ngIf="restForm.get('description')?.hasError('required') && restForm.get('description')?.touched">
+                                <span>La descripció del restaurant és obligatoria</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button routerLink=".." class="btn btn-secondary btn-lg float-start"> BACK </button>
+                            <button *ngIf="this._id !== null" (click)="deleteRestaurant()" class="btn btn-danger btn-lg float-mid"> DELETE </button>
+                            <button type="submit" [disabled]="restForm.invalid" class="btn btn-success btn-lg float-end"> CONFIRM </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

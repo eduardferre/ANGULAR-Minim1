@@ -1,18 +1,3 @@
-.title {
-    font-size: 1.2rem;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.title1 {
-    font-size: 2rem;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.fa-solid {
-    cursor: pointer;
-    margin-left: 7px;
-}
-
 body {
     overflow-x: hidden;
   }

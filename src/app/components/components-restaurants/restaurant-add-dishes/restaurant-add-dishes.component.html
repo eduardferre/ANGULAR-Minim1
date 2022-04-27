@@ -1,0 +1,65 @@
+<div class="container mt-3">
+    <div class="class row">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="title"> {{ title | uppercase }} </span>
+                    <form class="mt-3" [formGroup]="restForm" (ngSubmit)="addDish()">
+                        <div formGroupName="listDishes">
+                            <div class="mb-3">
+                                <input type="text" formControlName="title" 
+                                    class="form-control form-control-lg" placeholder="Dish Name">
+                                <!-- AIXÒ NO EM FUNCIONA????? -->
+                                <div class="text-danger"
+                                    *ngIf="!restForm.controls['title']?.hasError('required') && restForm.get('title')?.touched">
+                                    <span>El nom del dish és obligatori</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" formControlName="type" 
+                                    class="form-control form-control-lg" placeholder="Type">
+                                <!-- AIXÒ NO EM FUNCIONA????? -->
+                                <div class="text-danger"
+                                    *ngIf="!restForm.controls['type']?.hasError('required') && restForm.get('type')?.touched">
+                                    <span>El type és obligatori</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" formControlName="price" 
+                                    class="form-control form-control-lg" placeholder="Price">
+                                <!-- AIXÒ NO EM FUNCIONA????? -->
+                                <div class="text-danger"
+                                    *ngIf="!restForm.controls['price']?.hasError('required') && restForm.get('price')?.touched">
+                                    <span>El price és obligatori</span>
+                                </div>
+                            </div>
+                            <div *ngIf="this.nameDish !== null" class="mb-3">
+                                <input type="text" formControlName="rating" 
+                                    class="form-control form-control-lg" placeholder="Rating">
+                                <!-- AIXÒ NO EM FUNCIONA????? -->
+                                <div class="text-danger"
+                                    *ngIf="!restForm.controls['rating']?.hasError('required') && restForm.get('rating')?.touched">
+                                    <span>El nom del taste és obligatori</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <textarea type="text" formControlName="description" 
+                                    class="form-control form-control-lg" placeholder="Description"></textarea>
+                                <!-- AIXÒ NO EM FUNCIONA????? -->
+                                <div class="text-danger"
+                                    *ngIf="!restForm.controls['description']?.hasError('required') && restForm.get('description')?.touched">
+                                    <span>El nom del taste és obligatori</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button [routerLink]='["/list-restaurants", this._id]' class="btn btn-secondary btn-lg float-start"> BACK </button>
+                            <button *ngIf="this.title !== null" (click)="deleteDish()" [routerLink]='["/list-restaurants", this._id]' class="btn btn-danger btn-lg float-mid"> DELETE </button>
+                            <button type="submit" [disabled]="restForm.invalid" class="btn btn-success btn-lg float-end"> CONFIRM </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
