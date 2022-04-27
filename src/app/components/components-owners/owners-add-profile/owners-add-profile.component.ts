@@ -95,7 +95,6 @@ export class OwnersAddProfileComponent implements OnInit {
       if (this._id !== null) {
         this._ownerService.deleteOwner(this._id).subscribe(data => {
           console.log("User deleted");
-          this.router.navigate(['/list-owners']);
         }, error => {
           console.log(error);
         });
