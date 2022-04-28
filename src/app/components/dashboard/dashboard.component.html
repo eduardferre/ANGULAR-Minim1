@@ -49,6 +49,7 @@
                              <th scope="col"> Description </th>
                              <th scope="col"> Restaurant </th>
                              <th scope="col"> Amount </th>
+                             <th scope="col"> Date </th>
                              <th scope="col"></th>
                            </tr>
                          </thead>
@@ -57,6 +58,7 @@
                              <td> {{ den.description }} </td>
                              <td> {{ den.restaurant.restaurantName }} </td>
                              <td> {{ den.amount }} </td>
+                             <td> {{ den.denunciaDate | date }} </td>
                              <td>
                                  <i [routerLink]="['/', den?._id, 'edit-denuncia']" class="fa-solid fa-pen-to-square text-primary"> Edit </i>
                              </td>
