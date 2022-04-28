@@ -23,6 +23,7 @@ import { OwnersListComponent } from './components/components-owners/owners-list/
 import { RestaurantAddProfileComponent } from './components/components-restaurants/restaurant-add-profile/restaurant-add-profile.component';
 import { RestaurantAddTastesComponent } from './components/components-restaurants/restaurant-add-tastes/restaurant-add-tastes.component';
 import { RestaurantAddDishesComponent } from './components/components-restaurants/restaurant-add-dishes/restaurant-add-dishes.component';
+import { DenunciasEditComponent } from './components/dashboard/denuncias-edit/denuncias-edit.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { RestaurantAddDishesComponent } from './components/components-restaurant
     RestaurantAddProfileComponent,
     RestaurantAddTastesComponent,
     RestaurantAddDishesComponent,
+    DenunciasEditComponent,
   ],
   imports: [
     BrowserModule,

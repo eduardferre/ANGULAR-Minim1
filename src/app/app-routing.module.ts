@@ -19,11 +19,16 @@ import { OwnersAddRestaurantsComponent } from './components/components-owners/ow
 import { RestaurantAddTastesComponent } from './components/components-restaurants/restaurant-add-tastes/restaurant-add-tastes.component';
 import { RestaurantAddProfileComponent } from './components/components-restaurants/restaurant-add-profile/restaurant-add-profile.component';
 import { RestaurantAddDishesComponent } from './components/components-restaurants/restaurant-add-dishes/restaurant-add-dishes.component';
+import { DenunciasEditComponent } from './components/dashboard/denuncias-edit/denuncias-edit.component';
 
 // Routes
 
 const routes: Routes = [
   { path: '', component: DashboardComponent},
+  { path: 'add-denuncia', component: DenunciasEditComponent},
+  { path: ':_id/edit-denuncia', component: DenunciasEditComponent },
+
+
   { path: 'list-customers/add-customer', component: CustomerAddProfileComponent},
   { path: 'list-customers', component: CustomersListComponent},
   { path: 'list-customers/:_id', component: CustomerProfileComponent},

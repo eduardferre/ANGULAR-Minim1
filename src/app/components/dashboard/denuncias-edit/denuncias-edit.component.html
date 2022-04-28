@@ -1,0 +1,44 @@
+<div class="container mt-3">
+    <div class="class row">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="title"> {{ title | uppercase }} </span>
+                    <form class="mt-3" [formGroup]="denunciaForm" (ngSubmit)="addDenuncia()">
+                        <div class="mb-3" *ngIf="denuncia?.description == null">
+                            <div class="mb-3">
+                                <input type="text" formControlName="restaurant" 
+                                    class="form-control form-control-lg" placeholder="Restaurant Name">
+                                <div class="text-danger"
+                                    *ngIf="denunciaForm.get('restaurant')?.hasError('required') && denunciaForm.get('restaurant')?.touched">
+                                    <span>El nom del restaurant és obligatori</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="description"
+                                class="form-control form-control-lg" placeholder="Description">
+                            <div class="text-danger"
+                                *ngIf="denunciaForm.get('description')?.hasError('required') && denunciaForm.get('description')?.touched">
+                                <span>La descripció és obligatoria</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" formControlName="amount"
+                                class="form-control form-control-lg" placeholder="Amount">
+                            <div class="text-danger"
+                                *ngIf="denunciaForm.get('amount')?.hasError('required') && denunciaForm.get('amount')?.touched">
+                                <span>La amount és obligatoria</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button routerLink=".." class="btn btn-secondary btn-lg float-start"> BACK </button>
+                            <button routerLink="/" *ngIf="this._id !== null" (click)="deleteDenuncia()" class="btn btn-danger btn-lg float-mid"> DELETE </button>
+                            <button type="submit" [disabled]="denunciaForm.invalid" class="btn btn-success btn-lg float-end"> CONFIRM </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
